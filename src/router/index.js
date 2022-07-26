@@ -12,19 +12,36 @@ export default new VueRouter({
     routes:[
         {
             path:'/Home',
-            component:Home
+            component:Home,
+            meta:{
+                show:true
+            }
         },
         {
             path:'/Login',
-            component:Login
+            component:Login,
+            meta:{
+                show:false
+            }
         },
         {
             path:'/Register',
-            component:Register
+            component:Register,
+            meta:{
+                show:false
+            }
         },
         {
             path:'/Search',
-            component:Search
+            component:Search,
+            meta:{
+                show:true
+            }
         },
+        //重定向
+        {
+            path:'/',
+            redirect:"/Home"
+        }
     ]
 })
