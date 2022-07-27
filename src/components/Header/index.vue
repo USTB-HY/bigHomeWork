@@ -26,13 +26,13 @@
 				<!--头部第二行 搜索区域-->
 				<div class="bottom">
 					<h1 class="logoArea">
-						<router-link class="logo" title="尚品汇" to="/Home">
+						<router-link class="logo" title="尚品汇" to="/Home/">
 							<img src="./images/Logo.png" alt="">
 						</router-link>
 					</h1>
 					<div class="searchArea">
 						<form action="###" class="searchForm">
-							<input type="text" id="autocomplete" class="input-error input-xxlarge" />
+							<input type="text" id="autocomplete" class="input-error input-xxlarge" v-model="keyword"/>
 							<button class="sui-btn btn-xlarge btn-danger" type="button" @click="goSearch">搜索</button>
 						</form>
 					</div>
@@ -43,9 +43,17 @@
 <script>
 export default {
   name: "",
+  data() {
+    return {
+      keyword:''
+    }
+
+  },
   methods: {
     goSearch() {
-      this.$router.push('/Search')
+      // this.$router.push('/Search/' + this.keyword) //params传参
+      // this.$router.push('/Search/' + '?keyword='+ this.keyword) //query传参
+      this.$router.push({name:'Search',params:{k:this.keyword || undefined},query:{keyword:this.keyword}},()=>{},()=>{}) 
     }
   }
 };
