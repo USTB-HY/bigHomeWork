@@ -92,57 +92,53 @@
         </div>
     </div>
 </template>
-    <script src="./js/swiper.min.js"></script>
-    <script>
-        var mySwiper = new Swiper('#mySwiper', {
-            loop: true, // 循环模式选项
-            // 如果需要分页器
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            // 如果需要前进后退按钮
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-        });
-
-        var floor1Swiper = new Swiper('#floor1Swiper', {
-            loop: true, // 循环模式选项
-
-            // 如果需要分页器
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // 如果需要前进后退按钮
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            }
-        });
-
-        var floor2Swiper = new Swiper('#floor2Swiper', {
-            loop: true, // 循环模式选项
-
-            // 如果需要分页器
-            pagination: {
-                el: '.swiper-pagination',
-            },
-
-            // 如果需要前进后退按钮
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            }
-        })
-    </script>
-
-
 <script>
     export default {
         name:'Floor'
     }
+    import Swiper from "./js/swiper.min.js";
+    var mySwiper = new Swiper('#mySwiper', {
+        loop: true, // 循环模式选项
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        },
+    });
+
+    var floor1Swiper = new Swiper('#floor1Swiper', {
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
+    });
+
+    var floor2Swiper = new Swiper('#floor2Swiper', {
+        loop: true, // 循环模式选项
+
+        // 如果需要分页器
+        pagination: {
+            el: '.swiper-pagination',
+        },
+
+        // 如果需要前进后退按钮
+        navigation: {
+            nextEl: '.swiper-button-next',
+            prevEl: '.swiper-button-prev',
+        }
+    })
 </script>
 
 <style lang="less" scoped>
