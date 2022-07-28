@@ -10,6 +10,7 @@
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Login from './pages/Login'
+import axios from "axios";
 
 export default {
   name: 'App',
@@ -17,6 +18,21 @@ export default {
     Header,
     Footer,
     Login
+  },
+
+  //测试发出请求
+  beforeMount() {
+    let a = axios({
+      method:'GET',
+      url:'https://api.github.com/search/users?q=123'
+    }).then(
+      response=>{
+      console.log(response);
+      },      
+      error=>{
+        console.log(error.code);
+      }
+    )
   }
 }
 </script>
