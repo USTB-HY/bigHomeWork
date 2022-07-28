@@ -1,7 +1,7 @@
 <template>
 			<header class="header">
-        <h1>{{$store.state.num}}</h1>
-        <button @click="$store.commit('Add')">点我+1</button>
+        <!-- <h1>{{$store.state.num}}</h1>
+        <button @click="$store.commit('Add')">点我+1</button> -->
 				<!-- 头部的第一行 -->
 				<div class="top">
 					<div class="container">
