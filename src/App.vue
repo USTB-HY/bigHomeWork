@@ -10,6 +10,7 @@
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Login from './pages/Login'
+import {reqCategoryList} from '../src/api'
 
 export default {
   name: 'App',
@@ -17,7 +18,9 @@ export default {
     Header,
     Footer,
     Login
-  }
+  },
+
+  //测试发出请求
 }
 </script>
 

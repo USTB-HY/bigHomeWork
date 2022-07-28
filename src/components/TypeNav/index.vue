@@ -1694,8 +1694,14 @@
 </template>
 
 <script>
+import {reqCategoryList} from '../../api'
     export default {
-        name:'TypeNav'
+        name:'TypeNav',
+        mounted(){
+            reqCategoryList().then(function(data){
+                console.log(data);
+            })
+        }
     }
 </script>
 
