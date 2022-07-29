@@ -1695,12 +1695,14 @@
 
 <script>
 import {reqCategoryList} from '../../api'
+import  mapState  from "../../store";
     export default {
         name:'TypeNav',
         mounted(){
-            reqCategoryList().then(function(data){
-                console.log(data);
-            })
+            this.$store.dispatch('reqCategoryList')
+            // reqCategoryList().then(function(data){
+            //     console.log(data);
+            // })
         }
     }
 </script>

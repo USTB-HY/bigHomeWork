@@ -1,18 +1,21 @@
 import {reqCategoryList} from '../../api'
 
 const state = {
-    categoryList
+    categoryList:[]
 }
 
 const actions = {
-    categoryList(val) {
-        commit('categoryList',val)
+    categoryList() {
+        commit('categoryList')
     }
 }
 
 const mutations = {
-    categoryLis(val) {
-        this.state.categoryList = val
+    categoryList() {
+        // reqCategoryList().then(function(data){
+        //         console.log(data);
+        //     })
+        console.log(1);
     }
 }
 
@@ -21,6 +24,7 @@ const getters = {}
 
 
 export default {    
+    namescaped:true,
     state,
     actions,
     mutations,
