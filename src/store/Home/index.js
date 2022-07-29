@@ -1,18 +1,20 @@
 import {reqCategoryList} from '../../api'
 
 const state = {
-    categoryList
+    categoryList:[]
 }
 
 const actions = {
-    categoryList(val) {
-        commit('categoryList',val)
+    categoryList(context) {
+        context.commit('CATEGORYLIST',reqCategoryList())
     }
 }
 
 const mutations = {
-    categoryLis(val) {
-        this.state.categoryList = val
+    CATEGORYLIST(state,promiseVal) {
+        promiseVal.then((data) => {
+            state.categoryList = data.data
+        })
     }
 }
 
@@ -21,6 +23,7 @@ const getters = {}
 
 
 export default {    
+    namespaced:true,
     state,
     actions,
     mutations,
