@@ -5,17 +5,16 @@ const state = {
 }
 
 const actions = {
-    categoryList() {
-        commit('categoryList')
+    categoryList(context) {
+        context.commit('CATEGORYLIST',reqCategoryList())
     }
 }
 
 const mutations = {
-    categoryList() {
-        // reqCategoryList().then(function(data){
-        //         console.log(data);
-        //     })
-        console.log(1);
+    CATEGORYLIST(state,promiseVal) {
+        promiseVal.then((data) => {
+            state.categoryList = data.data
+        })
     }
 }
 
@@ -24,7 +23,7 @@ const getters = {}
 
 
 export default {    
-    namescaped:true,
+    namespaced:true,
     state,
     actions,
     mutations,
