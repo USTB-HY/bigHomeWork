@@ -2,7 +2,37 @@
     <div>
         <div class="type-nav">
             <div class="container">
-                <h2 class="all">全部商品分类</h2>
+                <div  @mouseleave="showOffNav"  @mouseenter="showNav">
+                    <h2 class="all">全部商品分类</h2>
+                    <transition name="sort">
+                        <div class="sort" v-show="curNavShow">  <!-- v-show 绑定数据不加： -->
+                            <div class="all-sort-list2" @click="goSearch">  
+                                <div class="item" v-for="(itemc1,index) in categoryList" :key="itemc1.categoryId"  @mouseenter="change(index)" :class="{cur:currentIndex == index}">
+                                    <h3>
+                                        <a href="javascript:;" :data-categoryName='itemc1.categoryName' :data-category1Id='itemc1.categoryId'>{{itemc1.categoryName}}</a>
+                                        <!-- <router-link to="/Search">{{itemc1.categoryName}}</router-link>  会渲染很多组件，卡顿 -->
+                                    </h3>
+                                    <div class="item-list clearfix">
+                                        <div class="subitem">
+                                            <dl class="fore" v-for="itemc2 in itemc1.categoryChild" :key="itemc2.categoryId">
+                                                <dt>
+                                                    <a href="javascript:;" :data-categoryName='itemc2.categoryName' :data-category2Id='itemc2.categoryId'>{{itemc2.categoryName}}</a>
+                                                    <!-- <router-link to="/Search">{{itemc2.categoryName}}</router-link> -->
+                                                </dt>
+                                                <dd>
+                                                    <em v-for="itemc3 in itemc2.categoryChild" :key="itemc3.categoryId">
+                                                        <a href="javascript:;" :data-categoryName='itemc3.categoryName' :data-category3Id='itemc3.categoryId'>{{itemc3.categoryName}}</a>
+                                                        <!-- <router-link to="/Search">{{itemc3.categoryName}}</router-link> -->
+                                                    </em>
+                                                </dd>
+                                            </dl>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </transition>
+                </div>
                 <nav class="nav">
                     <a href="###">服装城</a>
                     <a href="###">美妆馆</a>
@@ -13,44 +43,60 @@
                     <a href="###">有趣</a>
                     <a href="###">秒杀</a>
                 </nav>
-                <div class="sort">
-                    <div class="all-sort-list2">
-                        <div class="item bo" v-for="itemc1 in categoryList" :key="itemc1.categoryId">
-                            <h3>
-                                <a href="">{{itemc1.categoryName}}</a>
-                            </h3>
-                            <div class="item-list clearfix">
-                                <div class="subitem">
-                                    <dl class="fore" v-for="itemc2 in itemc1.categoryChild" :key="itemc2.categoryId">
-                                        <dt>
-                                            <a href="">{{itemc2.categoryName}}</a>
-                                        </dt>
-                                        <dd>
-                                            <em v-for="itemc3 in itemc2.categoryChild" :key="itemc3.categoryId">
-                                                <a href="">{{itemc3.categoryName}}</a>
-                                            </em>
-                                        </dd>
-                                    </dl>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 </template>
 
 <script>
-import { mapState,mapActions } from "vuex";
+import { mapState } from "vuex";
 
 export default {
         name:'TypeNav',
+        data() {
+            return {
+                currentIndex:-1,
+                curNavShow:true,
+            }
+        },
         computed:{
-            ...mapState('Home',['categoryList'])
+            ...mapState('Home',['categoryList']),
         },
         mounted(){
-            this.$store.dispatch('Home/categoryList')
+            this.curNavShow = this.$route.path == '/Home'? true : false
+        },
+        methods: {
+            change(val) {
+                this.currentIndex = val
+            },
+            goSearch(e) {
+                let event = e.target
+                let {categoryname,category1id,category2id,category3id} = event.dataset//通过自定义属性判断点击的元素标签
+                let location = {name:'Search'}
+                let query = {categoryName:categoryname}
+                if(categoryname) {
+                    if(category1id) {
+                        console.log(category1id);
+                        query.category1Id = category1id
+                    }else if (category2id) {
+                        console.log(category2id);
+                        query.category2Id = category2id
+                    }else if (category3id) {
+                        console.log(category3id);
+                        query.category3Id = category3id
+                    }
+                    location.query = query //通过整合location和query变成一个可用的push对象
+                    console.log(this.$route);
+                    this.$router.push(location,()=>{},()=>{})
+                }
+            },
+            showNav() {
+                this.curNavShow = true
+            },
+            showOffNav() {
+                this.curNavShow = this.$route.path == '/Home'? true : false
+                this.currentIndex = -1
+            }
         }
     }
 </script>
@@ -171,7 +217,25 @@ export default {
                             }
                         }
                     }
+                    
+                    .cur {
+                        background-color: skyblue;
+                    }
+
                 }
+            }
+
+            .sort-enter {
+                height: 0px;
+            }
+            .sort-enter-to{
+                height: 461px;
+            }
+            .sort-enter-leave{
+                height: 0px;
+            }
+            .sort-enter-active{
+                transition:0.1s linear;
             }
         }
     }

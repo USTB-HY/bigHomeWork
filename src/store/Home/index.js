@@ -1,13 +1,14 @@
 import {reqCategoryList} from '../../api'
 
 const state = {
-    categoryList:[]
+    categoryList:[],
 }
 
 const actions = {
     categoryList(context) {
         context.commit('CATEGORYLIST',reqCategoryList())
-    }
+    },
+
 }
 
 const mutations = {
@@ -15,7 +16,8 @@ const mutations = {
         promiseVal.then((data) => {
             state.categoryList = data.data
         })
-    }
+    },
+
 }
 
 const getters = {}

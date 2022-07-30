@@ -1,0 +1,14 @@
+[
+    {
+        "id":"1",
+        "imagesURL":"/images/home/floor-1-b01.png"
+    },
+    {
+        "id":"2",
+        "imagesURL":"/images/home/floor-1-b02.png"
+    },
+    {
+        "id":"3",
+        "imagesURL":"/images/home/floor-1-b03.png"
+    }
+]

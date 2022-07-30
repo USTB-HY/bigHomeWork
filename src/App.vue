@@ -18,8 +18,10 @@ export default {
     Footer,
     Login
   },
-
-  //测试发出请求
+  mounted() {
+    //买次开启网页只发出一次请求
+    this.$store.dispatch('Home/categoryList')
+  }
 }
 </script>
 
