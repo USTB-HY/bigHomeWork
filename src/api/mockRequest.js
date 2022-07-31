@@ -10,6 +10,7 @@ requests.interceptors.request.use((config)=>{
 })
 
 requests.interceptors.response.use((res)=>{
+    console.log(res.data);
     return res.data
 },
 (err)=>{

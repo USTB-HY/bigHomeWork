@@ -24,6 +24,11 @@ export default {
         Like,
         Floor,
     },
+    mounted() {
+        console.log('Home挂载');
+        this.$nextTick(console.log('Home挂载的next'))
+    }
+
 }
 </script>
 

@@ -1,7 +1,7 @@
 import {mockReqBanner} from '../../api'
 
 const state = {
-    banner:[]
+    banners:[]
 }
 
 const actions = {
@@ -13,7 +13,8 @@ const actions = {
 const mutations = {
     BANNER(state,promiseVal) {
         promiseVal.then((data) => {
-            state.banner = data.data
+            state.banners = data.data
+            console.log('返回参数');
         })
     },
 }
