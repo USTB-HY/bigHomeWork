@@ -86,7 +86,6 @@ export default {
                         query.category3Id = category3id
                     }
                     location.query = query //通过整合location和query变成一个可用的push对象
-                    console.log(this.$route);
                     this.$router.push(location,()=>{},()=>{})
                 }
             },

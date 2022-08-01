@@ -1,7 +1,5 @@
 <template>
       <div class="outer">
-        <h5>querykwyeord======{{keyword}}</h5>
-        <h5>pramskwyeord======{{k}}</h5>
         <!-- 商品分类导航 -->
         <TypeNav/>
 
