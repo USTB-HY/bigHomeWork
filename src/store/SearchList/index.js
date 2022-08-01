@@ -46,7 +46,15 @@ const mutations = {
     },
 }
 
-const getters = {}
+const getters = {
+    AttrsList(){ return state.searchList.attrsList },
+    GoodsList(){ return state.searchList.goodsList },
+    PageNo() { return state.searchList.pageNo},
+    PageSize() { return state.searchList.pageSize},
+    Total() { return state.searchList.total},
+    TotalPages() { return state.searchList.totalPages},
+    TrademarkList() { return state.searchList.trademarkList},
+}
 
 
 
