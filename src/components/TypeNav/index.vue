@@ -76,16 +76,14 @@ export default {
                 let query = {categoryName:categoryname}
                 if(categoryname) {
                     if(category1id) {
-                        console.log(category1id);
                         query.category1Id = category1id
                     }else if (category2id) {
-                        console.log(category2id);
                         query.category2Id = category2id
                     }else if (category3id) {
-                        console.log(category3id);
                         query.category3Id = category3id
                     }
-                    location.query = query //通过整合location和query变成一个可用的push对象
+                    location.query = query
+                    location.params = this.$route.params //通过整合location和query变成一个可用的push对象
                     this.$router.push(location,()=>{},()=>{})
                 }
             },
