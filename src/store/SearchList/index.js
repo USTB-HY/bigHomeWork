@@ -43,6 +43,7 @@ const mutations = {
         state.searchParams.category3Id = val.query.category3Id
         state.searchParams.categoryName = val.query.categoryName
         state.searchParams.keyword = val.params.k
+        state.searchParams.pageNo = val.params.pageNo
     },
 }
 

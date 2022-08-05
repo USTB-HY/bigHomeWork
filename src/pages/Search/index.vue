@@ -197,12 +197,12 @@
                                     </div>
                                     <div class="price">
                                         <strong>
-                                                <em>¥</em>
+                                                <em>¥ </em>
                                                 <i>{{goods.price}}</i>
                                             </strong>
                                     </div>
                                     <div class="attr">
-                                        <a target="_blank" href="item.html"  :title="goods.title">Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)Apple苹果iPhone 6s (A1699)</a>
+                                        <a target="_blank" href="item.html"  :title.="goods.title" v-html="goods.title"></a>
                                     </div>
                                     <div class="commit">
                                         <i class="command">已有<span>{{goods.hotScore}}</span>人评价</i>
@@ -221,20 +221,8 @@
                                 <li class="prev disabled">
                                     <a href="#">«上一页</a>
                                 </li>
-                                <li class="active">
-                                    <a href="#">1</a>
-                                </li>
-                                <li>
-                                    <a href="#">2</a>
-                                </li>
-                                <li>
-                                    <a href="#">3</a>
-                                </li>
-                                <li>
-                                    <a href="#">4</a>
-                                </li>
-                                <li>
-                                    <a href="#">5</a>
+                                <li :class="(pageNo==activePage? 'active' : '')" v-for="pageNo in TotalPages" :key="pageNo"  @click="changePage(pageNo)" >
+                                    <a href="#">{{pageNo}}</a>
                                 </li>
                                 <li class="dotted"><span>...</span></li>
                                 <li class="next">
@@ -436,6 +424,11 @@
 
     export default {
         name:'Search',
+        data() {
+            return {
+                activePage:-1
+            }
+        },
         computed: {
             keyword() {
                 return this.$route.query.keyword
@@ -445,6 +438,11 @@
                 return this.$route.params.k
             },
             ...mapGetters('SearchList',['AttrsList','GoodsList','PageNo','PageSize','Total','TotalPages','TrademarkList'])
+        },
+        methods: {
+            changePage(val) {
+                this.activePage = val
+            }
         }
 
     }
