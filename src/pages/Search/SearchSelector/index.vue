@@ -20,7 +20,7 @@
         <div class="fl value">
           <ul class="type-list">
             <li v-for="attrValue in attr.attrValueList" :key="attrValue.index">
-              <a>{{ attrValue }}</a>
+              <a @click.prevent="addAttrTag(attr,attrValue)">{{ attrValue }}</a>
             </li>
           </ul>
         </div>
@@ -53,6 +53,9 @@ export default {
   methods: {
     addTag(val) {
       this.$bus.$emit('CreateBreadTag',val)
+    },
+    addAttrTag() {
+      this.$bus.$emit('CreateBreadTag',arguments)
     }
   }
 };

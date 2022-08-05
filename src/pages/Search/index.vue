@@ -314,7 +314,10 @@ export default {
   mounted() {
     this.getData()
     this.$bus.$on('CreateBreadTag',(val)=>{
-      this.searchParams.trademark = `${val.tmId}:${val.tmName}`
+      this.searchParams.trademark = val.tmId? `${val.tmId}:${val.tmName}` : undefined      
+      this.searchParams.props = val.length? `[${val[0].attrId}:${val[1]}:${val[0].attrName}]` : undefined
+      // console.log(`[${val[0].attrId}:${val[1]}:${val[0].attrName}]`);
+      console.log(this.searchParams.trademark,this.searchParams.props);
       this.getData()
     })
   },
