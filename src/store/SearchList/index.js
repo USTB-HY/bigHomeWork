@@ -10,40 +10,20 @@ const state = {
         totalPages: undefined,
         trademarkList: []
     },
-    searchParams: {
-        "category1Id": "",
-        "category2Id": "",
-        "category3Id": "",
-        "categoryName": "",
-        "keyword": "",
-        "order": "",
-        "pageNo": undefined,
-        "pageSize": undefined,
-        "props": [],
-        "trademark": "",
-    },
 }
 
 const actions = {
-    searchList(context) {
-        context.commit('SEARCHLIST', reqSearchInfoList(context.state.searchParams))
+    async searchList({commit},params) {
+        let result = await reqSearchInfoList(params)
+        if (result.code == 200) {
+            commit('SEARCHLIST', result.data)
+        }
     },
 }
 
 const mutations = {
-    SEARCHLIST(state, promiseVal) {
-        promiseVal.then((data) => {
-            state.searchList = data.data
-            console.log(state.searchList,11);
-        })
-    },
-    SEARCHPARAMS(state, val) {
-        state.searchParams.category1Id = val.query.category1Id
-        state.searchParams.category2Id = val.query.category2Id
-        state.searchParams.category3Id = val.query.category3Id
-        state.searchParams.categoryName = val.query.categoryName
-        state.searchParams.keyword = val.params.k
-        state.searchParams.pageNo = val.params.pageNo
+    SEARCHLIST(state, Val) {
+        state.searchList = Val
     },
 }
 

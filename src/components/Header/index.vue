@@ -55,17 +55,12 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-
 export default {
   name: "",
   data() {
     return {
       keyword: "",
     };
-  },
-  computed:{
-    ...mapState('SearchList',['searchParams'])
   },
   methods: {
     goSearch() {
@@ -75,18 +70,22 @@ export default {
       //合并参数
       let location = {
         name: "Search",
-        params: { k: this.keyword || undefined },
+        params: { keyword: this.keyword || undefined },
       }
       location.query = this.$route.query
-      this.$store.commit('SearchList/SEARCHPARAMS',location)
-      this.$store.dispatch('SearchList/searchList')
       this.$router.push(
         location,
         () => {},
         () => {}
       );
     },
+
   },
+  mounted() {
+    this.$bus.$on('clearInput',()=>{
+      this.keyword = '' 
+    })
+  }
 };
 </script>
 

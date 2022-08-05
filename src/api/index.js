@@ -16,6 +16,5 @@ export const mockReqBanner = () =>mockRequests({
 export const reqSearchInfoList = (params) =>requests({
     url:'/list',
     method:'post',
-    data:params //data指明传输的数据对象，必记住
-    
+    data:params //data指明传输的数据对象，必记住    这里params至少是个空对象
 })
