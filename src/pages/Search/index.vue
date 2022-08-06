@@ -2,7 +2,6 @@
   <div class="outer">
     <!-- 商品分类导航 -->
     <TypeNav />
-
     <!--list-content-->
     <div class="main">
       <div class="py-container">
@@ -23,8 +22,8 @@
             <li class="with-x" v-if="searchParams.trademark">{{searchParams.trademark.split(':')[1]}}
                 <i @click="removeBreadTagTradeMark">×</i>
             </li>
-            <li class="with-x" v-for="attrTag in curAttrName" :key="attrTag.index">{{attrTag.class}}:{{attrTag.value}}
-                <i @click="removeBreadTagTradeMark">×</i>
+            <li class="with-x" v-for="attrTag in searchParams.props" :key="attrTag.index">{{attrTag.split(':')[2]}}:{{attrTag.split(':')[1]}}
+                <i @click="removeBreadAttrTag(attrTag)">×</i>
             </li>
           </ul>
         </div>
@@ -247,7 +246,6 @@ export default {
         props: [],
         trademark: "",
       },
-      curAttrName:[],
     };
   },
   computed: {
@@ -298,6 +296,16 @@ export default {
         this.searchParams.trademark = undefined
         this.getData()
     },
+    removeBreadAttrTag(val) {
+      let arr = this.searchParams.props
+      for (let i = 0; i < arr.length; i++) {
+        if (!arr[i].indexOf(val)) {
+          arr.splice(i,1)
+        }
+      }
+      this.searchParams.props = arr
+      this.getData()
+    },
     getData() {
         this.$store.dispatch('SearchList/searchList',this.searchParams)
     }
@@ -328,7 +336,6 @@ export default {
             return
         }else{
             this.searchParams.props.unshift(`${val[0].attrId}:${val[1]}:${val[0].attrName}`)
-            this.curAttrName.unshift({'class':val[0].attrName,'value':val[1]})
         }
       }
       this.getData()
