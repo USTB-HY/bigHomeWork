@@ -23,6 +23,9 @@
             <li class="with-x" v-if="searchParams.trademark">{{searchParams.trademark.split(':')[1]}}
                 <i @click="removeBreadTagTradeMark">×</i>
             </li>
+            <li class="with-x" v-for="attrTag in curAttrName" :key="attrTag.index">{{attrTag.class}}:{{attrTag.value}}
+                <i @click="removeBreadTagTradeMark">×</i>
+            </li>
           </ul>
         </div>
         <!--selector-->
@@ -244,6 +247,7 @@ export default {
         props: [],
         trademark: "",
       },
+      curAttrName:[],
     };
   },
   computed: {
@@ -314,10 +318,19 @@ export default {
   mounted() {
     this.getData()
     this.$bus.$on('CreateBreadTag',(val)=>{
-      this.searchParams.trademark = val.tmId? `${val.tmId}:${val.tmName}` : undefined      
-      this.searchParams.props = val.length? `[${val[0].attrId}:${val[1]}:${val[0].attrName}]` : undefined
-      // console.log(`[${val[0].attrId}:${val[1]}:${val[0].attrName}]`);
-      console.log(this.searchParams.trademark,this.searchParams.props);
+      this.searchParams.trademark = val.tmId? `${val.tmId}:${val.tmName}` : this.searchParams.trademark
+      if (val.length) {
+        let isContain = false
+        this.searchParams.props.forEach(element => {
+            isContain = isContain || (element == `${val[0].attrId}:${val[1]}:${val[0].attrName}`)
+        })
+        if(isContain){ 
+            return
+        }else{
+            this.searchParams.props.unshift(`${val[0].attrId}:${val[1]}:${val[0].attrName}`)
+            this.curAttrName.unshift({'class':val[0].attrName,'value':val[1]})
+        }
+      }
       this.getData()
     })
   },
