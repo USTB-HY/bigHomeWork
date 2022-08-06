@@ -10,6 +10,7 @@
 import Footer from './components/Footer'
 import Header from './components/Header'
 import Login from './pages/Login'
+// import {reqSearchInfoList} from './api'
 
 export default {
   name: 'App',
@@ -17,6 +18,12 @@ export default {
     Header,
     Footer,
     Login
+  },
+  mounted() {
+    //买次开启网页只发出一次请求
+    this.$store.dispatch('Home/categoryList')
+    this.$store.dispatch('ListContainer/banner')
+    // console.log(reqSearchInfoList({"categoryName": "手机"}));//成功
   }
 }
 </script>

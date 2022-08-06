@@ -33,7 +33,7 @@ export default new VueRouter({
         },
         {
             name:'Search',
-            path:'/Search/:k?',//params传参占位
+            path:'/Search/:keyword?',//params传参占位
             // path:'/Search',
             component:Search,
             props:true,
