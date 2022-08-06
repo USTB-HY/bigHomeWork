@@ -34,23 +34,11 @@
           <div class="sui-navbar">
             <div class="navbar-inner filter">
               <ul class="sui-nav">
-                <li class="active">
+                <li :class="focus" @click.prevent="reOrder(1)">
                   <a href="#">综合</a>
                 </li>
-                <li>
+                <li :class="loseFocus" @click.prevent="reOrder(2)">
                   <a href="#">销量</a>
-                </li>
-                <li>
-                  <a href="#">新品</a>
-                </li>
-                <li>
-                  <a href="#">评价</a>
-                </li>
-                <li>
-                  <a href="#">价格⬆</a>
-                </li>
-                <li>
-                  <a href="#">价格⬇</a>
                 </li>
               </ul>
             </div>
@@ -106,30 +94,21 @@
           <div class="fr page">
             <div class="sui-pagination clearfix">
               <ul>
-                <li class="prev disabled">
-                  <a href="#">«上一页</a>
-                </li>
-                <li class="active">
-                  <a href="#">1</a>
-                </li>
-                <li>
-                  <a href="#">2</a>
-                </li>
-                <li>
-                  <a href="#">3</a>
-                </li>
-                <li>
-                  <a href="#">4</a>
-                </li>
-                <li>
-                  <a href="#">5</a>
+                <li :class="searchParams.pageNo==1?'prev disabled':''">
+                  <a href="#" @click.prevent="changePage(searchParams.pageNo-1)">«上一页</a>
+                </li>                
+                <li v-for="page in pages" 
+                    :key="page" 
+                    @click.prevent="changePage(page)"
+                    :class="page == searchParams.pageNo? 'active' : ''">
+                  <a href="#">{{page}}</a>
                 </li>
                 <li class="dotted"><span>...</span></li>
-                <li class="next">
-                  <a href="#">下一页»</a>
+                <li :class="searchParams.pageNo==TotalPages?'prev disabled':'next'">
+                  <a href="#" @click.prevent="changePage(searchParams.pageNo+1)">下一页»</a>
                 </li>
               </ul>
-              <div><span>共10页&nbsp;</span></div>
+              <div><span>共{{TotalPages}}页&nbsp;</span></div>
             </div>
           </div>
         </div>
@@ -246,6 +225,8 @@ export default {
         props: [],
         trademark: "",
       },
+      focus : 'active',
+      loseFocus : '',
     };
   },
   computed: {
@@ -264,6 +245,27 @@ export default {
       "TotalPages",
       "TrademarkList",
     ]),
+    pages: {
+      get() {
+        let start = this.searchParams.pageNo-3>0?this.searchParams.pageNo-2:1
+        let end = start + 4<this.TotalPages?start + 4:this.TotalPages
+        let arr = new Array()
+        for (let i = start;i<=end;i++){
+          arr[arr.length] = i
+        }
+        return arr
+      },
+      set(val) {
+        let start = val-3>0?val-2:1
+        let end = start + 4<this.TotalPages?start + 4:this.TotalPages
+        let arr = new Array()
+        for (let i = start;i<=end;i++){
+          arr[arr.length] = i
+        }
+        return arr
+      }
+
+    }
   },
   methods: {
     removeBreadTagCategoryName(){
@@ -308,6 +310,17 @@ export default {
     },
     getData() {
         this.$store.dispatch('SearchList/searchList',this.searchParams)
+    },
+    reOrder(val) {
+      this.searchParams.order = val+":\"asc\""
+      this.getData()
+    },
+    changePage(index) {
+      if (index < 1 || index > this.TotalPages) {
+        return
+      }
+      this.searchParams.pageNo = index
+      this.getData()
     }
   },
   watch: {
