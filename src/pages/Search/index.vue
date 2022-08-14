@@ -48,13 +48,13 @@
               <li
                 class="yui3-u-1-5"
                 v-for="goods in GoodsList"
-                :key="goods.index"
+                :key="goods.id"
               >
                 <div class="list-wrap">
                   <div class="p-img">
-                    <a href="item.html" target="_blank"
-                      ><img :src="goods.defaultImg"
-                    /></a>
+                    <router-link :to="`/Detail/${goods.id}`">
+                      <img :src="goods.defaultImg"/>
+                    </router-link>
                   </div>
                   <div class="price">
                     <strong>
@@ -91,7 +91,7 @@
               </li>
             </ul>
           </div>
-          <div class="fr page">
+          <!-- <div class="fr page">
             <div class="sui-pagination clearfix">
               <ul>
                 <li :class="searchParams.pageNo==1?'prev disabled':''">
@@ -110,8 +110,9 @@
               </ul>
               <div><span>共{{TotalPages}}页&nbsp;</span></div>
             </div>
-          </div>
-        </div>
+          </div>-->
+          <Pagenation :pageNo='searchParams.pageNo' :pageSize='searchParams.pageSize' :total='Total' :continues='5'/>
+        </div> 
         <!--hotsale-->
         <div class="clearfix hot-sale">
           <h4 class="title">热卖商品</h4>
@@ -220,8 +221,8 @@ export default {
         categoryName: "",
         keyword: "",
         order: "",
-        pageNo: undefined,
-        pageSize: undefined,
+        pageNo: 1,
+        pageSize: 10,
         props: [],
         trademark: "",
       },
@@ -264,7 +265,6 @@ export default {
         }
         return arr
       }
-
     }
   },
   methods: {
@@ -315,13 +315,13 @@ export default {
       this.searchParams.order = val+":\"asc\""
       this.getData()
     },
-    changePage(index) {
-      if (index < 1 || index > this.TotalPages) {
-        return
-      }
-      this.searchParams.pageNo = index
-      this.getData()
-    }
+    // changePage(index) {
+    //   if (index < 1 || index > this.TotalPages) {
+    //     return
+    //   }
+    //   this.searchParams.pageNo = index
+    //   this.getData()
+    // }
   },
   watch: {
     //$route也是这个组件的属性，也可以监听，因此可以再次刷新数据
@@ -351,6 +351,13 @@ export default {
             this.searchParams.props.unshift(`${val[0].attrId}:${val[1]}:${val[0].attrName}`)
         }
       }
+      this.getData()
+    })
+    this.$bus.$on('getPageNo',(val) => {
+      if (val < 1 || val > this.TotalPages) {
+        return
+      }
+      this.searchParams.pageNo = val
       this.getData()
     })
   },

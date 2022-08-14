@@ -7,6 +7,8 @@ import TypeNav from "./components/TypeNav";//注册全局组件，不需要再�
 Vue.component(TypeNav.name,TypeNav)
 import Carsouel from "./components/Carsouel";//注册全局组件，不需要再子组件中一个个引用了
 Vue.component(Carsouel.name,Carsouel)
+import Pagenation from "./components/Pagenation";//注册全局组件，不需要再子组件中一个个引用了
+Vue.component(Pagenation.name,Pagenation)
 import store from './store';
 import "./mock/mockServe";
 import "swiper/css/swiper.css";

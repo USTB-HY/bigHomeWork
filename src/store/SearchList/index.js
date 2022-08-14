@@ -4,8 +4,8 @@ const state = {
     searchList: {
         attrsList: [],
         goodsList: [],
-        pageNo: undefined,
-        pageSize: undefined,
+        pageNo: 1,
+        pageSize: 10,
         total: undefined,
         totalPages: undefined,
         trademarkList: []

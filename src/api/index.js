@@ -8,6 +8,11 @@ export const reqCategoryList = () =>requests({
     method:'GET'
 })
 
+export const reqItemDetail = (val) =>requests({
+    url:`/item/${val}`,
+    method:'GET'
+})//捞Detail的接口
+
 export const mockReqBanner = () =>mockRequests({
     url:'/banner',
     method:'GET'

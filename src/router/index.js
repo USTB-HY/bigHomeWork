@@ -1,50 +1,12 @@
 
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import routes from './routes'
 Vue.use(VueRouter)
 
-import Home from '../pages/Home'
-import Login from '../pages/Login'
-import Register from '../pages/Register'
-import Search from '../pages/Search'
-
 export default new VueRouter({
-    routes:[
-        {
-            path:'/Home',
-            component:Home,
-            meta:{
-                show:true
-            }
-        },
-        {
-            path:'/Login',
-            component:Login,
-            meta:{
-                show:false
-            }
-        },
-        {
-            path:'/Register',
-            component:Register,
-            meta:{
-                show:false
-            }
-        },
-        {
-            name:'Search',
-            path:'/Search/:keyword?',//params传参占位
-            // path:'/Search',
-            component:Search,
-            props:true,
-            meta:{
-                show:true
-            }
-        },
-        //重定向
-        {
-            path:'/',
-            redirect:"/Home"
-        }
-    ]
+    routes,
+    scrollBehavior (to, from, savedPosition) {
+        return { y: 0 } 
+    }
 })
