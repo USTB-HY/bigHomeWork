@@ -4,6 +4,8 @@ import Home from "./Home";
 import ListContainer from './ListContainer'
 import SearchList from './SearchList'
 import Detail from './Detail'
+import Register from './Register'
+import Login from "./Login";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -11,6 +13,8 @@ export default new Vuex.Store({
         Home,
         ListContainer,
         SearchList,
-        Detail
+        Detail,
+        Register,
+        Login
     },
 })

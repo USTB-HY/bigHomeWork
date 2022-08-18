@@ -24,6 +24,9 @@ export default {
         Like,
         Floor,
     },
+    mounted() {
+        this.$store.dispatch('Login/getUserInfo')        
+    }
 }
 </script>
 

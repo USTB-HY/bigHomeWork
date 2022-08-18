@@ -23,3 +23,26 @@ export const reqSearchInfoList = (params) =>requests({
     method:'post',
     data:params //data指明传输的数据对象，必记住    这里params至少是个空对象
 })
+
+export const reqRegister = (params) =>requests({
+    url:'/user/passport/register',
+    method:'post',
+    data:params //data指明传输的数据对象，必记住    这里params至少是个空对象
+})
+
+export const reqCode = (params) =>requests({
+    url:'/user/passport/sendCode/'+params,
+    method:'GET'
+})
+
+export const reqLogin = (params) =>requests({
+    url:'/user/passport/login',
+    method:'Post',
+    data:params
+})
+
+export const reqUserInfo = () =>requests({
+    url:'/user/passport/auth/getUserInfo',
+    method:'get',
+})
+

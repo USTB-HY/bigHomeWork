@@ -6,24 +6,24 @@
 				</h3>
 				<div class="content">
 					<label>手机号:</label>
-					<input type="text" placeholder="请输入你的手机号">
+					<input type="text" placeholder="请输入你的手机号" v-model="phone">
 					<span class="error-msg">错误提示信息</span>
 				</div>
 				<div class="content">
 					<label>验证码:</label>
-					<input type="text" placeholder="请输入验证码">
-					<img ref="code" src="http://182.92.128.115/api/user/passport/code" alt="code">
+					<input type="text" placeholder="请输入验证码" v-model="code">
+					<button @click.prevent="reqCode">获取验证码</button>
 					<span class="error-msg">错误提示信息</span>
 				</div>
 				<div class="content">
 					<label>登录密码:</label>
-					<input type="text" placeholder="请输入你的登录密码">
+					<input type="text" placeholder="请输入你的登录密码" v-model="password">
 					<span class="error-msg">错误提示信息</span>
 				</div>
 				<div class="content">
 					<label>确认密码:</label>
-					<input type="text" placeholder="请输入确认密码">
-					<span class="error-msg">错误提示信息</span>
+					<input type="text" placeholder="请输入确认密码" v-model="pwdCheck">
+					<span class="error-msg" v-if="pwdCheck && pwdCheck!=password">两次密码不相同</span>
 				</div>
 				<div class="controls">
 					<input name="m1" type="checkbox">
@@ -31,15 +31,34 @@
 					<span class="error-msg">错误提示信息</span>
 				</div>
 				<div class="btn">
-					<button>完成注册</button>
+					<button @click.prevent="register">完成注册</button>
 				</div>
 			</div>
 </template>
 
 <script>
+	import { mapState } from "vuex";
     export default {
-        name:'Register'
-
+        name:'Register',
+		data() {
+			return {
+				phone: '',
+				password:'',
+				pwdCheck:'',
+			}
+		},
+		methods: {
+			reqCode() {
+				this.$store.dispatch('Register/getCode',this.phone)
+			},
+			register() {
+				this.$store.dispatch('Register/register',{'phone':this.phone,'password':this.password,'code':this.code})
+				this.$router.push('Login')
+			}
+		},
+		computed: {
+			...mapState('Register',['code'])
+		},
     }
 </script>
 
