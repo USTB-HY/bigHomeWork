@@ -27,22 +27,63 @@
                 <!-- 右侧选择区域布局 -->
                 <div class="InfoWrap">
                     <div class="goodsDetail">
-
+                        <h3 class="InfoName">{{SkuInfo.skuName}}</h3>
+                        <p class="news">推荐选择下方[移动优惠购],手机套餐齐搞定,不用换号,每月还有花费返</p>
+                        <div class="priceArea">
+                            <div class="priceArea1">
+                                <div class="title">价&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;格</div>
+                                <div class="price">
+                                    <i>¥</i>
+                                    <em>{{SkuInfo.price}}</em>
+                                    <span>降价通知</span>
+                                </div>
+                                <div class="remark">
+                                    <i>累计评价</i>
+                                    <em>123</em>
+                                </div>
+                            </div>
+                            <div class="priceArea2">
+                                <div class="title">
+                                    <i>促&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;销</i>
+                                </div>
+                                <div class="fixWidth">
+                                    <i class="red-bg">加价购</i>
+                                    <em class="t-gray">满999.00另加20.00元，或满1999.00另加30.00元，或满2999.00另加40.00元，即可在购物车换购热销商品</em>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="support">
+                            <div class="supportArea">
+                                <div class="title">支&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;持</div>
+                                <div class="fixWidth">以旧换新，闲置手机回收 4G套餐超值抢 礼品购</div>
+                            </div>
+                            <div class="supportArea">
+                                <div class="title">配 送 至</div>
+                                <div class="fixWidth">广东省 深圳市 宝安区</div>
+                            </div>
+                        </div>
                     </div>
 
                     <div class="choose">
                         <div class="chooseArea">
-                            <div class="choosed"></div>
+                            <div class="choosed">
+                                <dl v-for="(item, index) in SpuSaleAttrList" :key="index">
+                                    <dt class="title">{{item.saleAttrName}}</dt>
+                                    <dd v-for="(styleofitem, index) in item.spuSaleAttrValueList" :key="index">
+                                        {{styleofitem.saleAttrValueName}}
+                                    </dd>
+                                </dl>
+                            </div>
                         </div>
 
                         <div class="cartWrap">
                             <div class="controls">
-                                <input autocomplete="off" value="1" class="itxt" />
-                                <a href="###" class="plus">+</a>
-                                <a href="###" class="mins">-</a>
+                                <input autocomplete="off" v-model="skuNum" class="itxt" />
+                                <button class="plus" @click.prevent="skuNum++">+</button>
+                                <button class="mins" @click.prevent="skuNum--" :disabled="skuNum===1">-</button>
                             </div>
                             <div class="add">
-                                <a href="###" target="_blank">加入购物车</a>
+                                <a @click.prevent="AddCart">加入购物车</a>
                             </div>
                         </div>
                     </div>
@@ -72,7 +113,7 @@
                             <li>
                                 <div class="list-wrap">
                                     <div class="p-img">
-                                        <img src="../images/part01.png" />
+                                        <img src="./images/part01.png" />
                                     </div>
                                     <div class="attr">Apple苹果iPhone 6s (A1699) </div>
                                     <div class="price">
@@ -87,7 +128,7 @@
                             <li>
                                 <div class="list-wrap">
                                     <div class="p-img">
-                                        <img src="../images/part02.png" />
+                                        <img src="./images/part02.png" />
                                     </div>
                                     <div class="attr">
                                         <em>Apple苹果iPhone 6s (A1699)</em>
@@ -106,7 +147,7 @@
                             <li>
                                 <div class="list-wrap">
                                     <div class="p-img">
-                                        <img src="../images/part03.png" />
+                                        <img src="./images/part03.png" />
                                     </div>
                                     <div class="attr">
                                         <em>Apple苹果iPhone 6s (A1699)</em>
@@ -125,7 +166,7 @@
                             <li>
                                 <div class="list-wrap">
                                     <div class="p-img">
-                                        <img src="../images/part02.png" />
+                                        <img src="./images/part02.png" />
                                     </div>
                                     <div class="attr">
                                         <em>Apple苹果iPhone 6s (A1699)</em>
@@ -144,7 +185,7 @@
                             <li>
                                 <div class="list-wrap">
                                     <div class="p-img">
-                                        <img src="../images/part03.png" />
+                                        <img src="./images/part03.png" />
                                     </div>
                                     <div class="attr">
                                         <em>Apple苹果iPhone 6s (A1699)</em>
@@ -172,13 +213,13 @@
                     <h4 class="kt">选择搭配</h4>
                     <div class="good-suits">
                         <div class="master">
-                            <img src="../images/l-m01.png" />
+                            <img src="./images/l-m01.png" />
                             <p>￥5299</p>
                             <i>+</i>
                         </div>
                         <ul class="suits">
                             <li class="suitsItem">
-                                <img src="../images/dp01.png" />
+                                <img src="./images/dp01.png" />
                                 <p>Feless费勒斯VR</p>
                                 <label>
                                     <input type="checkbox" value="39">
@@ -186,7 +227,7 @@
                                 </label>
                             </li>
                             <li class="suitsItem">
-                                <img src="../images/dp02.png" />
+                                <img src="./images/dp02.png" />
                                 <p>Feless费勒斯VR</p>
                                 <label>
                                     <input type="checkbox" value="50">
@@ -194,7 +235,7 @@
                                 </label>
                             </li>
                             <li class="suitsItem">
-                                <img src="../images/dp03.png" />
+                                <img src="./images/dp03.png" />
                                 <p>Feless费勒斯VR</p>
                                 <label>
                                     <input type="checkbox" value="59">
@@ -202,7 +243,7 @@
                                 </label>
                             </li>
                             <li class="suitsItem">
-                                <img src="../images/dp04.png" />
+                                <img src="./images/dp04.png" />
                                 <p>Feless费勒斯VR</p>
                                 <label>
                                     <input type="checkbox" value="99">
@@ -267,9 +308,9 @@
                                 <li>机身内存：64GB</li>
                             </ul>
                             <div class="intro-detail">
-                                <img src="../images/intro01.png" />
-                                <img src="../images/intro02.png" />
-                                <img src="../images/intro03.png" />
+                                <img src="./images/intro01.png" />
+                                <img src="./images/intro02.png" />
+                                <img src="./images/intro03.png" />
                             </div>
                         </div>
                         <div id="two" class="tab-pane">
@@ -287,37 +328,45 @@
                     </div>
                 </div>
             </div>
-        </section>
+        </section> -->
     </div>
 </template>
 <script>
 import Zoom from "../../components/Zoom";
 import ZoomList from "../../components/ZoomList";
 import { mapGetters,mapActions } from "vuex";
+import mixin from "../../mixins";
+
 export default {
   components:{
     Zoom,
     ZoomList
     },
   name: "Detail",
+  data() {
+    return {
+        skuNum:1
+    }
+  },
   computed: {
-    ...mapGetters('Detail',['CategoryView','Price','SkuInfo','SpuSaleAttrList','ValuesSkuJson'])
+    ...mapGetters('Detail',['CategoryView','Price','SkuInfo','SpuSaleAttrList','ValuesSkuJson']),
+    skuId() {
+        return this.SkuInfo.id || undefined
+    }
   },
   methods: {
-    ...mapActions('Detail',['getGoodsInfo'])
+    ...mapActions('Detail',['getGoodsInfo']),
+    AddCart() {
+        // let {skuId,skuNum} = {skuId:this.skuId,skuNum:this.skuNum}
+        // this.$router.push(`/AddCart/${skuId}/${skuNum}`)
+        // this.$store.dispatch('Cart/addCartList',{skuId,skuNum})
+        this.mixinAddCart(this.skuId,this.skuNum)
+    }
   },
   mounted() {
     this.$store.dispatch('Detail/getGoodsInfo',this.$route.params.intemId)
-    // console.log('挂载，发送请求');
   },
-  // updated() {
-  //   console.log('Detail页面更新');
-  // },
-  // watch: {
-  //   SkuInfo() {
-  //     console.log('SkuInfo被修改了');
-  //   }
-  // }
+  mixins:[mixin]
 };
 </script>
 

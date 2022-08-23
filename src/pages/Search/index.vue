@@ -78,11 +78,11 @@
                   </div>
                   <div class="operate">
                     <a
-                      href="success-cart.html"
-                      target="_blank"
+                      href="javascript:;"
                       class="sui-btn btn-bordered btn-danger"
-                      >加入购物车</a
-                    >
+                      @click.prevent="AddCart(goods.id,1)"
+                      >加入购物车
+                    </a>
                     <a href="javascript:void(0);" class="sui-btn btn-bordered"
                       >收藏</a
                     >
@@ -206,9 +206,11 @@
 <script>
 import { mapGetters } from "vuex";
 import SearchSelector from './SearchSelector'
+import mixin from "../../mixins";
 
 export default {
   name: "Search",
+  mixins:[mixin],
   components: {
     SearchSelector,
     },
@@ -315,6 +317,9 @@ export default {
       this.searchParams.order = val+":\"asc\""
       this.getData()
     },
+    AddCart(skuId,skuNum){
+      this.mixinAddCart(skuId,skuNum)
+    }
     // changePage(index) {
     //   if (index < 1 || index > this.TotalPages) {
     //     return

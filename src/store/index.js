@@ -6,6 +6,7 @@ import SearchList from './SearchList'
 import Detail from './Detail'
 import Register from './Register'
 import Login from "./Login";
+import Cart from "./Cart";
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -15,6 +16,7 @@ export default new Vuex.Store({
         SearchList,
         Detail,
         Register,
-        Login
+        Login,
+        Cart        
     },
 })

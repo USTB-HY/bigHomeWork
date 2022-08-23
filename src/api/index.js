@@ -46,3 +46,17 @@ export const reqUserInfo = () =>requests({
     method:'get',
 })
 
+export const reqCart = () =>requests({
+    url:'/cart/cartList',
+    method:'get',
+})
+
+export const reqAddCartList = ({skuId,skuNum}) =>requests({
+    url:`/cart/addToCart/${skuId}/${skuNum}`,
+    method:'Post',
+})
+
+export const reqDeleteCart = (skuId) =>requests({
+    url:`/cart/deleteCart/${skuId}`,
+    method:'Delete',
+})

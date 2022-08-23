@@ -17,7 +17,7 @@
         </div>
         <div class="typeList">
           <a href="###">我的订单</a>
-          <a href="###">我的购物车</a>
+          <router-link to="/Cart">我的购物车</router-link>
           <a href="###">我的尚品汇</a>
           <a href="###">尚品汇会员</a>
           <a href="###">企业采购</a>
@@ -86,12 +86,13 @@ export default {
       this.$store.dispatch('Login/logout')
       this.$router.push('Home')
     },
-
   },
   mounted() {
     this.$bus.$on('clearInput',()=>{
       this.keyword = '' 
-    })
+    }),
+    
+    this.$store.dispatch('Login/getUserInfo')        
   },
   computed: {
     ...mapState('Login',['userInfo'])

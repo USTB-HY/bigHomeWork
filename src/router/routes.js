@@ -8,6 +8,8 @@ import Login from '../pages/Login'
 import Register from '../pages/Register'
 import Search from '../pages/Search'
 import Detail from '../view/Detail'
+import Cart from '../view/Cart'
+import AddCart from '../view/AddCart'
 
 export default [
         {
@@ -47,6 +49,16 @@ export default [
             meta:{
                 show:true
             }
+        },
+        {
+            name:'Cart',
+            path:'/Cart',
+            component:Cart,
+        },
+        {
+            name:'AddCart',
+            path:'/AddCart/:skuId/:skuNum',
+            component:AddCart,
         },
         //重定向
         {
